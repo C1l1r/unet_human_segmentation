@@ -11,6 +11,8 @@ def load_checkpoint(checkpoint, model):
     print("=> Loading checkpoint")
     model.load_state_dict(checkpoint["state_dict"])
 
+
+# Loaders retrieve pictures
 def get_loaders(
     train_dir,
     train_maskdir,
@@ -52,6 +54,7 @@ def get_loaders(
 
     return train_loader, val_loader
 
+
 def check_accuracy(loader, model, device="cuda" if torch.cuda.is_available() else "cpu"):
     num_correct = 0
     num_pixels = 0
@@ -65,8 +68,8 @@ def check_accuracy(loader, model, device="cuda" if torch.cuda.is_available() els
             preds = torch.sigmoid(model(x))
             preds = (preds > 0.5).float()
             num_correct += (preds == y).sum()
-            num_pixels += torch.numel(preds)
-            dice_score += (2 * (preds * y).sum()) / (
+            num_pixels += torch.numel(preds)  # Does not really represent much
+            dice_score += (2 * (preds * y).sum()) / (  # Easier to interpret and makes much more sense
                 (preds + y).sum() + 1e-8
             )
 
@@ -76,6 +79,8 @@ def check_accuracy(loader, model, device="cuda" if torch.cuda.is_available() els
     print(f"Dice score: {dice_score/len(loader)}")
     model.train()
 
+
+# Only to manually estimate the effectiveness
 def save_predictions_as_imgs(
     loader, model, folder="saved_images/", device="cuda"
 ):

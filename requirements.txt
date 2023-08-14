@@ -1,0 +1,10 @@
+requests
+numpy
+streamlit
+Pillow~=9.1.0
+torch
+albumentations
+tqdm
+torchvision
+opencv-python
+Flask

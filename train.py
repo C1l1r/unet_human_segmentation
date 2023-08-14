@@ -13,11 +13,12 @@ check_accuracy,
 save_predictions_as_imgs
 )
 
+# Specifications for neural net
 LEARNING_RATE = 1e-4
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 BATCH_SIZE = 32
 NUM_EPOCHS = 6
-NUM_WORKERS = 2
+NUM_WORKERS = 2                 # For Windows set to 1
 IMAGE_HEIGHT = 240
 IMAGE_WIDTH = 160
 PIN_MEMORY = True
@@ -27,7 +28,7 @@ TRAIN_MASK_DIR = "data_png/train_masks/"
 VAL_IMG_DIR = "data_png/test_images/"
 VAL_MASK_DIR = "data_png/test_masks/"
 
-
+# Train_fn goes through all data once
 def train_fn(loader, model, optimizer, loss_fn, scaler):
     loop = tqdm(loader)
 
@@ -37,6 +38,7 @@ def train_fn(loader, model, optimizer, loss_fn, scaler):
 
         # forward
         with torch.cuda.amp.autocast():
+            print(data.shape, data)
             predictions = model(data)
             loss = loss_fn(predictions, targets)
 
@@ -58,8 +60,8 @@ def main():
             A.HorizontalFlip(p=0.5),
             A.VerticalFlip(p=0.1),
             A.Normalize(
-                mean=[0.0, 0.0, 0.0],
-                std=[1.0, 1.0, 1.0],
+                mean=[0.0, 0.0, 0.0],   # might worth changing to mean=[0.485, 0.456, 0.406]
+                std=[1.0, 1.0, 1.0],    # might worth changing to std=[0.229, 0.224, 0.225]
                 max_pixel_value=255.0,
             ),
             ToTensorV2(),
@@ -70,7 +72,7 @@ def main():
         [
             A.Resize(height=IMAGE_HEIGHT, width=IMAGE_WIDTH),
             A.Normalize(
-                mean=[0.0, 0.0, 0.0],
+                mean=[0.0, 0.0, 0.0], # should be same as in training
                 std=[1.0, 1.0, 1.0],
                 max_pixel_value=255.0,
             ),
@@ -95,28 +97,24 @@ def main():
     )
 
     if LOAD_MODEL:
-        load_checkpoint(torch.load("models/UNET_checkpoints/my_checkpoint.pth.tar"), model)
+        load_checkpoint(torch.load("models/UNET_checkpoints/my_checkpoint.pth.tar",  map_location=torch.device(DEVICE)), model)
 
     check_accuracy(val_loader, model, device=DEVICE)
     scaler = torch.cuda.amp.GradScaler()
 
     for epoch in range(NUM_EPOCHS):
         train_fn(train_loader, model, optimizer, loss_fn, scaler)
-
-        # save model
         checkpoint = {
             "state_dict": model.state_dict(),
             "optimizer": optimizer.state_dict(),
         }
         save_checkpoint(checkpoint, filename='models/UNET_checkpoints/my_checkpoint.pth.tar')
-
-        # check accuracy
         check_accuracy(val_loader, model, device=DEVICE)
-
-        # print some examples to a folder
         save_predictions_as_imgs(
             val_loader, model, folder="data_png/saved_images/", device=DEVICE
         )
-    torch.save(model, 'models/UNET_model.pt')
+        torch.save(model, 'models/UNET_model.pt') # Should only be used if load state is not available
+
 if __name__ == "__main__":
             main()
+

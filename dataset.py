@@ -1,9 +1,6 @@
-import pandas as pd
 from PIL import Image
-import io
 import numpy as np
 import os
-import shutil
 from torch.utils.data import Dataset
 
 # dataset = pd.read_parquet('data/train-00000-of-00002-9e861cba931f46ba.parquet')
