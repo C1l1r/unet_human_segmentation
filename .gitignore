@@ -1,1 +1,2 @@
-*.tar
+
+models/UNET_checkpoints/my_checkpoint.pth.tar
