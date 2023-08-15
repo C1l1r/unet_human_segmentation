@@ -33,9 +33,9 @@ Build docker image using command:
 docker-compose -f docker_compose_file_path up
 ```
 ## Example:
-
+```
 docker-compose -f projects\human_segmentatiom\docker-compose.yml up
-
+```
 ## Input and Output
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/master/input%20image.png?raw=true)
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/master/output%20example.jpg?raw=true)
