@@ -5,10 +5,15 @@ from io import BytesIO
 from PIL import Image
 import cv2
 import datetime
+import os
 
 # Example of working UI
 
 api_url = "http://localhost:5000"
+
+folder_path = "results"
+if not os.path.exists(folder_path):
+    os.mkdir(folder_path)
 
 st.title("Human segmentation with simple UNET")
 st.write('Upload your file!')
