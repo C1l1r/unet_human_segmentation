@@ -8,3 +8,4 @@ tqdm
 torchvision
 opencv-python
 Flask
+waitress
