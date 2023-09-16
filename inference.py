@@ -77,7 +77,7 @@ def process_image():
     result = add_mask(image_1, predicted)
     result = cv2.resize(result, (image_1_shape[1], image_1_shape[0]))
     result = cv2.cvtColor(result, cv2.COLOR_BGR2RGB)
-    # cv2.imwrite(f'results/{file.name}{datetime.datetime.now()}.jpeg', np.array(result))
+    cv2.imwrite(f'results/{file.name}{datetime.datetime.now()}.jpeg', np.array(result))
     return jsonify({'prediction': result.tolist()})
 
 
@@ -108,8 +108,8 @@ def process_video():
         out.write(result)  # Merging images with masks back to video
     cap.release()
     out.release()
-    # with open(f'results/{video.filename}{datetime.datetime.now()}.webm', 'wb') as f:
-    #     f.write(result)
+    with open(f'results/{video.filename}{datetime.datetime.now()}.webm', 'wb') as f:
+        f.write(result)
 
     with open('output.webm', 'rb') as f:
         result = f.read()
