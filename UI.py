@@ -3,6 +3,7 @@ import numpy as np
 import streamlit as st
 from io import BytesIO
 from PIL import Image
+
 import cv2
 import datetime
 import os
@@ -11,9 +12,6 @@ import os
 
 api_url = "http://localhost:5000"
 
-folder_path = "results"
-if not os.path.exists(folder_path):
-    os.mkdir(folder_path)
 
 st.title("Human segmentation with simple UNET")
 st.write('Upload your file!')
@@ -40,7 +38,7 @@ if input_type == "Image":
             t.empty()
             t.markdown('Your prediction:')
             st.image(predicted, use_column_width=True)
-            cv2.imwrite(f'results/{input_image.name}{datetime.datetime.now()}.jpeg', predicted)
+
 
 
 
@@ -56,7 +54,7 @@ elif input_type == "Video":
             predicted = requests.post(f"{api_url}/process_video", files={'file': input_video})
             predicted = predicted.content
             st.video(predicted)
-            with open(f'results/{input_video.name}{datetime.datetime.now()}.webm', 'wb') as f:
-                f.write(predicted)
+            # with open(f'results/{input_video.name}{datetime.datetime.now()}.webm', 'wb') as f:
+            #     f.write(predicted)
 
 
