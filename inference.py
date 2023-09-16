@@ -11,6 +11,7 @@ import io
 import os
 from waitress import serve
 import logging
+import datetime
 
 
 
@@ -108,11 +109,12 @@ def process_video():
         out.write(result)  # Merging images with masks back to video
     cap.release()
     out.release()
-    with open(f'results/{video.filename}{datetime.datetime.now()}.webm', 'wb') as f:
-        f.write(result)
+
 
     with open('output.webm', 'rb') as f:
         result = f.read()
+    with open(f'results/{video.filename}{datetime.datetime.now()}.webm', 'wb') as f:
+        f.write(result)
     return result
 
 
