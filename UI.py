@@ -4,9 +4,14 @@ import streamlit as st
 from io import BytesIO
 from PIL import Image
 
+import cv2
+import datetime
+import os
+
 # Example of working UI
 
-api_url = "http://localhost:5000"
+api_url = "http://44.200.146.102:5000"
+
 
 st.title("Human segmentation with simple UNET")
 st.write('Upload your file!')
@@ -34,6 +39,9 @@ if input_type == "Image":
             t.markdown('Your prediction:')
             st.image(predicted, use_column_width=True)
 
+
+
+
 elif input_type == "Video":
     input_video = st.file_uploader("Upload a video file", type=["mp4", "rb", "webm", 'avi'])
     if input_video is not None:
@@ -46,3 +54,6 @@ elif input_type == "Video":
             predicted = requests.post(f"{api_url}/process_video", files={'file': input_video})
             predicted = predicted.content
             st.video(predicted)
+
+
+

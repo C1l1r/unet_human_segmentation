@@ -8,10 +8,17 @@ import cv2
 from PIL import Image
 from unet_model import UNET
 import io
-
+import os
+from waitress import serve
+import logging
+import datetime
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
+
+folder_path = "./results"
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
 
 # Is here to get argumants from UI
 parser = argparse.ArgumentParser()
@@ -70,6 +77,7 @@ def process_image():
     result = add_mask(image_1, predicted)
     result = cv2.resize(result, (image_1_shape[1], image_1_shape[0]))
     result = cv2.cvtColor(result, cv2.COLOR_BGR2RGB)
+    cv2.imwrite(f'results/{file.name}{datetime.datetime.now()}.jpeg', np.array(result))
     return jsonify({'prediction': result.tolist()})
 
 
@@ -101,9 +109,15 @@ def process_video():
     cap.release()
     out.release()
 
+
     with open('output.webm', 'rb') as f:
         result = f.read()
+    with open(f'results/{video.filename}{datetime.datetime.now()}.webm', 'wb') as f:
+        f.write(result)
     return result
 
 
-app.run(host='0.0.0.0', debug=False)  # These specifications fo demonstration purposes only
+logging.basicConfig(level=logging.INFO)
+serve(app, host='0.0.0.0', port=5000)
+
+
