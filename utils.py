@@ -97,3 +97,4 @@ def save_predictions_as_imgs(
             torchvision.utils.save_image(y.unsqueeze(1)[i], f"{folder}{idx}_{i}.png")
 
     model.train()
+

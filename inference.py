@@ -14,12 +14,11 @@ import logging
 import datetime
 
 
-
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-folder_path = "results"
+folder_path = "./results"
 if not os.path.exists(folder_path):
-    os.mkdir(folder_path)
+    os.makedirs(folder_path)
 
 # Is here to get argumants from UI
 parser = argparse.ArgumentParser()
@@ -118,7 +117,7 @@ def process_video():
     return result
 
 
-
-
 logging.basicConfig(level=logging.INFO)
 serve(app, host='0.0.0.0', port=5000)
+
+

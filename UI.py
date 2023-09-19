@@ -10,7 +10,7 @@ import os
 
 # Example of working UI
 
-api_url = "http://localhost:5000"
+api_url = "http://44.200.146.102:5000"
 
 
 st.title("Human segmentation with simple UNET")
@@ -54,7 +54,6 @@ elif input_type == "Video":
             predicted = requests.post(f"{api_url}/process_video", files={'file': input_video})
             predicted = predicted.content
             st.video(predicted)
-            # with open(f'results/{input_video.name}{datetime.datetime.now()}.webm', 'wb') as f:
-            #     f.write(predicted)
+
 
 
