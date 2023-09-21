@@ -9,3 +9,5 @@ torchvision
 opencv-python
 Flask
 waitress
+boto3
+watchdog
