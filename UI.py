@@ -10,7 +10,7 @@ import os
 
 # Example of working UI
 
-api_url = "http://44.200.146.102:5000"
+api_url = "http://3.237.15.211:5000"
 
 
 st.title("Human segmentation with simple UNET")
