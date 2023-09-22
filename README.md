@@ -7,7 +7,7 @@ When migrating any project to the cloud every one in a team should be informed a
 
 _In this detailed step-by-step tutorial we would only use the following repo, therefore readers are welcomed to follow the instructions!_
 
-![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/console.png)
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/Updated_diagram.png)
 
 Here we can see the **EC2 instance** connected to **S3 database** which is used to store collected user data. External database provide an opportunity to collect users data that could used for furter model training or fine-tunning. Obviously, the EC2 virtual machine itself has the memory, however after a machine termination its data gets erased. An example of such case could be growth in demand that will launch additional instances and after deman gets back to normal extra instances would be demolished with all theirs valuable data. That's the case we're avoiding with provided architecture. Having created the architecture diagram the next step would be to open the AWS console and implement it!
 
@@ -20,4 +20,15 @@ For now screenshots sre self-sufficient therefore I will share one very importan
 
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/ec2_creation.png)
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/choosing_processor.png)\
-For simpler projects the free tier processor should be sufficient, hovewer Pytorch that we are using is much more that free tier **1GB** RAM could take.
+For simpler projects the free tier processor should be sufficient, hovewer Pytorch that we are using is much more that free tier **1GB** RAM could take.\
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/instance_created.png)
+
+### Creating S3 instance
+Is a pretty straightforward process. Have a look.\
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/database_creation.png)
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/s3_bucket_options.png)
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/s3_acess_option.png)\
+We will configure the access later in this tutorial.
+### Creating the IAM role
+In oreder to be able to access the S3 instance from EC2 we need a role that will provide all the necessarry rights to it.
+![image]()
