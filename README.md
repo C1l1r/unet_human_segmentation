@@ -1,43 +1,13 @@
-# unet_human_segmentation
-### General information
-The goal of this project was to implement the UNET architecture from scratch and arrange model for use meeting all the modern industry standards.
-## Data
-The original dataset for this model was takken from kaggle and consists of images of humans. 
+# Simple cloud solution for trained UNET neural network
+In recent years, the integration of Artificial Intelligence (AI) models in various applications has become increasingly prevalent. AI models require substantial computational resources, making efficient deployment a critical consideration. One powerful solution is leveraging cloud hosting, which provides scalability, flexibility, and ease of access to computational power. In this tutorial, we will explore the benefits of using cloud hosting for AI model deployment using a human segmentation binary classification UNET model as a practical example.
+### Building diagram for our solution
+For this example we will use the simplest possible architecture, which nevertheless could be scaled easily for higher demand. Of course, it could be addapted for clients demands, like availability in case of local power offs, lower latence for remote regions or integration of on-site resources.
 
-Link: https://huggingface.co/datasets/mattmdjaga/human_parsing_dataset/tree/main/data
+_In this detailed step-by-step tutorial we would only use the following repo, therefore readers are welcomed to follow the instructions!_
 
-## Model architecture
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/Updated_diagram.png)
 
-In this project was used the UNET model that consists of three parts: encoder, decoder and bottleneck.
+Here we can see the **EC2 instance** connected to **S3 database** which is used to store collected user data. External database provide an opportunity to collect users data that could used for furter model training or fine-tunning. Obviously, the EC2 virtual machine itself has the memory, however after a machine termination its data gets erased. An example of such case could be growth in demand that will launch additional instances and after deman gets back to normal extra instances would be demolished with all theirs valuable data. That's the case we're avoiding with provided architecture. Having created the architecture the next step would be to open the AWS console and implement it!
 
-## Training
-
-The model was trained with the following specifications:
-
-* OPTIMIZER = Adam
-* LEARNING_RATE = 1e-4
-* BATCH_SIZE = 32
-* NUM_EPOCHS = 6
-* LOSS FUNCTION = BCEWithLogitsLoss
-
-## Dice Score
-After training model achieved 96% dice score on validation dataset.
-
-## Usage
-
-To use the trained model for human segmentation, follow the instructions below:
-
-Build docker image using command:
-
-```
-docker-compose -f docker_compose_file_path up
-```
-## Example:
-```
-docker-compose -f projects\human_segmentatiom\docker-compose.yml up
-```
-## Input and Output
-![image](https://github.com/C1l1r/unet_human_segmentation/blob/master/input%20image.png?raw=true)
-![image](https://github.com/C1l1r/unet_human_segmentation/blob/master/output%20example.jpg?raw=true)
-
-
+### Creating EC2 instance 
+At first glance the 
