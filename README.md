@@ -30,7 +30,7 @@ Is a pretty straightforward process. Have a look.\
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/s3_acess_option.png)\
 We will configure the access later in this tutorial.
 ## Creating the IAM role
-In oreder to be able to access the S3 instance from EC2 we need a role that will provide all the necessarry rights to it.
+In oreder to be able to access the S3 instance from EC2 we need a role that will provide all the necessarry rights to it.\
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/create_iam_policy.png)\
 In production we should always follow the **principle of least privilege**, however for the demonstration purposes we will stick to simplest solutions.\
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/adding_policies.png)
