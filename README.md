@@ -52,3 +52,10 @@ here we should use the ```bg``` command in order to run the second file that wil
 ```python  s3_file_uploader.py```
 Now when we have the server running we can connect to it from our local machine. Also woth mentioning that this API uses Flask, however it could be switched to **AWS ApiGateway**
 ## Launching UI and testing
+In order to perform the next step you should pull the github folder on machine you want to connect to api and change the default variable to **public IpV4** of EC2 instance. 
+Then you can simply use the ```streamlit run UI.py``` to run the UI and upload the file!\
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/UI_with_uploaded_video.png)
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/video_saved.png)
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/file_on_s3.png)
+## Conclusion
+This arcticle should provide you with the general idea on cloud computing and AWS implementation ideas. However, despite being a powerful resource it should be used with great caution. As an example of suboptimal desisions that have led to unwnted expenses could be used this [case](https://devclass.com/2023/05/05/reduce-costs-by-90-by-moving-from-microservices-to-monolith-amazon-internal-case-study-raises-eyebrows/) Thank you for your attention!
