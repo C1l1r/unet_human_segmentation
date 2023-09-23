@@ -12,11 +12,11 @@ _In this detailed step-by-step tutorial we would only use the following repo, th
 Here we can see the **EC2 instance** connected to **S3 database** which is used to store collected user data. External database provide an opportunity to collect users data that could used for furter model training or fine-tunning. Obviously, the EC2 virtual machine itself has the memory, however after a machine termination its data gets erased. An example of such case could be growth in demand that will launch additional instances and after deman gets back to normal extra instances would be demolished with all theirs valuable data. That's the case we're avoiding with provided architecture. Having created the architecture diagram the next step would be to open the AWS console and implement it!
 
 ## Creating EC2 instance 
-At first glance the AWS might look overwhelming, but you will get use to it, trust me. 
+At first glance the AWS might look overwhelming, but you will get use to it, trust me.\
 
-![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/console.png)
+![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/console.png)\
 
-For now screenshots sre self-sufficient therefore I will share one very important advice I got from one senior cloud engineer - **keep it simple** and stick to the most basic recources you possibly can. Using one extremely specialized tool provided by AWS (that there are **tons of**) may cause an unexpected need to replace it with anything because the _exact tool_ is no longer supported or the versions are no longer competable with one another. 
+For now screenshots sre self-sufficient therefore I will share one very important advice I got from one senior cloud engineer - **keep it simple** and stick to the most basic recources you possibly can. Using one extremely specialized tool provided by AWS (that there are **tons of**) may cause an unexpected need to replace it with anything because the _exact tool_ is no longer supported or the versions are no longer competable with one another.\
 
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/ec2_creation.png)
 ![image](https://github.com/C1l1r/unet_human_segmentation/blob/aws/images/choosing_processor.png)\
